@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .all{
+            /* background: url(https://images.unsplash.com/photo-1731462385471-90cf5aa51848?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8) no-repeat center center/cover; */
+            background: url(https://plus.unsplash.com/premium_photo-1731114103697-c3a21192181c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D) no-repeat center center/cover;
+            display: grid;
+            place-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h2{
+            text-align: center;
+        }
+        .age{
+            background: linear-gradient(rgba(03, 04, 02, 0.2), rgba(06, 05, 06, 0.4));
+            padding: 50px;
+        }
+        .age > div{
+            margin: 25px 0;
+        }
+        input{
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 17px;
+            text-align: center;
+        }
+     ::placeholder{
+            font-size: 13px;
+        }
+        #check_age{
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            outline: none;
+            background: linear-gradient(rgb(40, 30, 70, 0.3), rgb(78, 9, 216, 0.5));
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <div class="age">
+            <h2>AGE CALCULATOR</h2>
+        <div class="input1">
+            <input type="text" id="year" placeholder="enter your birth year">
+        </div>
+        <div class="input2">
+            <input type="text" id="month" placeholder="enter your birth month">
+        </div>
+        <div class="input3">
+            <input type="text" id="day" placeholder="enter your birth day">
+        </div>
+        <h3 id="result"></h3>
+        <div class="button">
+            <button id="check_age">Calculate Age</button>
+        </div>
+        </div>
+    </div>
+    <script>
+        let birth_year = document.getElementById("year");
+let birth_month = document.getElementById("month");
+let birth_day = document.getElementById("day");
+let but_ton = document.getElementById("check_age");
+
+
+// console.log(birth_year);
+// console.log(birth_month);
+
+let runCalculation = () => {
+    let current_time = new Date();
+
+    let current_year = current_time.getFullYear();
+    let current_month = current_time.getMonth() + 1;
+    let current_day = current_time.getDate();
+
+    let year = parseInt(birth_year.value);
+    let month = parseInt(birth_month.value);
+    let day = parseInt(birth_day.value)
+
+    let info = document.getElementById("result");
+
+    if (birth_year.value == "" || birth_month.value == "" || birth_day == "") {
+        // alert("enter a valid input");
+        info.textContent = "enter a valid input";
+        info.style.color = "red";
+        info.style.textAlign ="center";
+    }else if (year >= current_year || month < 1 || month > 12 || day < 1 || day > 31) {
+        // alert("invalid month or year entered");
+        info.textContent = "invalid month or year entered";
+        info.style.color = "red"
+        info.style.textAlign ="center";
+    }else{
+        let calc_age = current_year - birth_year.value;
+        let calc_month = current_month - birth_month.value;
+        let calc_day = current_day - birth_day.value;
+        info.textContent = `you are ${calc_age} year(s),
+        ${calc_month} month(s)and ${calc_day} day(s) of age`;
+        info.style.color = "green";
+        info.style.textAlign ="center";
+
+        // console.log(calc_age);
+        // console.log(calc_month); 
+    }
+
+    birth_year.value = "";
+    birth_month.value = "";
+    birth_day.value = "";
+
+    // console.log(current_year);
+    // console.log(current_month);
+}
+
+but_ton.addEventListener("click", runCalculation)
+
+    </script>
+    <script src="./js/age.js"></script>
+</body>
+</html>
